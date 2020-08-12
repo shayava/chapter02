@@ -4,11 +4,29 @@
 <head>
   <title>{{ title }}</title>
   <link rel='stylesheet' href='/stylesheets/style.css' />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js">
+    <script src="/scripts/index.js"></script>
+  </script>
 </head>
 
 <body>
   <h1>{{ title }}</h1>
-  <p>Your user ID is {{ userId }}.</p>
-</body>
+  <form action="/games" method="POST" id="createGame">
+    <input type="text" name="word" id="word" placeholder="Enter a word to guess..." />
+    <input type="submit" /> </form>
+  <h2>Games created by you</h2>
+  <ul id="createdGames">
+    {{#createdGames}}
+    {{> createdGame}}
+    {{/createdGames}}
+  </ul>
+  <h2>Games available to play</h2>
+  <ul id="availableGames">
+    {{#availableGames}}
+    <li><a href="/games/{{id}}">#{{id}}</a></li>
+    {{/availableGames}}
+  </ul>
+
+  <body>
 
 </html>
