@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 language: node_js
 before_script:
   - npm install -g gulp
@@ -6,4 +6,3 @@ script: gulp
 node_js:
   - 10
 
->>>>>>> 8c6e7fde8f9d56e06216604dd46cbd2a64071947
