@@ -1,3 +1,8 @@
+"use strict";
+const gulp = require("gulp");
+const mocha = require("gulp-mocha");
+const env = require("gulp-env");
+
 const eslint = require("gulp-eslint");
 const istanbul = require("gulp-istanbul");
 
