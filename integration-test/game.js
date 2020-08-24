@@ -1,21 +1,23 @@
 (function () {
-  'use strict';
-  var expect = require('chai').expect;
-  var page = require('webpage').create();
-  var rootUrl = 'http://localhost:3000';
-  withGame('Example', function () {
-    expect(getText('#word')).to.equal('_______');
+  "use strict";
+  var expect = require("chai").expect;
+  var page = require("webpage").create();
+  const shell = require("gulp-shell");
+  var rootUrl = "http://localhost:" + require("system").env.TEST_PORT || 3000;
+
+  withGame("Example", function () {
+    expect(getText("#word")).to.equal("_______");
     page.evaluate(function () {
       $(document).ajaxComplete(window.callPhantom);
     });
-    page.sendEvent('keydown', page.event.key.E);
+    page.sendEvent("keydown", page.event.key.E);
     page.onCallback = verify(function () {
-      expect(getText('#word')).to.equal('E_____E');
-      expect(getText('#missedLetters')).to.be.empty;
-      page.sendEvent('keydown', page.event.key.T);
+      expect(getText("#word")).to.equal("E_____E");
+      expect(getText("#missedLetters")).to.be.empty;
+      page.sendEvent("keydown", page.event.key.T);
       page.onCallback = verify(function () {
-        expect(getText('#word')).to.equal('E_____E');
-        expect(getText('#missedLetters')).to.equal('T');
+        expect(getText("#word")).to.equal("E_____E");
+        expect(getText("#missedLetters")).to.equal("T");
         phantom.exit();
       });
     });
@@ -31,7 +33,7 @@
       try {
         expectations();
       } catch (e) {
-        console.log('Test failed!');
+        console.log("Test failed!");
         handleError(e.message);
       }
     };

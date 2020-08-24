@@ -1,4 +1,7 @@
 const eslint = require("gulp-eslint");
+const istanbul = require("gulp-istanbul");
+
+const shell = require("gulp-shell");
 gulp.task("lint-server", function () {
   return gulp
     .src(["src/**/*.js", "!src/public/**/*.js"])
@@ -51,3 +54,39 @@ gulp.task("lint", [
   "lint-integration-test",
 ]);
 gulp.task("default", ["lint", "test"]);
+
+gulp.task("instrument", function () {
+  return gulp.src("src/**/*.js").pipe(istanbul()).pipe(istanbul.hookRequire());
+});
+
+gulp.task("test", ["lint-test", "instrument"], function () {
+  gulp
+    .src("test/**/*.js")
+    .pipe(mocha())
+    .pipe(istanbul.writeReports())
+    .pipe(
+      istanbul.enforceThresholds({
+        thresholds: { global: 90 },
+      })
+    );
+});
+
+gulp.task("integration-test", ["lint-integration-test", "test"], (done) => {
+  const TEST_PORT = 5000;
+  let server = require("http")
+    .createServer(require("./src/app.js"))
+    .listen(TEST_PORT, function () {
+      gulp
+        .src("integration-test/**/*.js")
+        .pipe(
+          shell(
+            "node node_modules/phantomjs-prebuilt/bin/phantomjs<%=file.path%>",
+            {
+              env: { TEST_PORT: TEST_PORT },
+            }
+          )
+        )
+        .on("error", () => server.close(done))
+        .on("end", () => server.close(done));
+    });
+});
