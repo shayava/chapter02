@@ -1,20 +1,20 @@
 $(function () {
-  "use strict";
-  var word = $("#word");
-  var length = word.data("length");
+  'use strict';
+  var word = $('#word');
+  var length = word.data('length');
   // Create placeholders for each letter
   for (var i = 0; i < length; ++i) {
-    word.append("<span>_</span>");
+    word.append('<span>_</span>');
   }
   var guessedLetters = [];
   var guessLetter = function (letter) {
-    $.post("guesses", { letter: letter }).done(function (data) {
+    $.post('guesses', { letter: letter }).done(function (data) {
       if (data.positions.length) {
         data.positions.forEach(function (position) {
-          word.find("span").eq(position).text(letter);
+          word.find('span').eq(position).text(letter);
         });
       } else {
-        $("#missedLetters").append("<span>" + letter + "</span>");
+        $('#missedLetters').append('<span>' + letter + '</span>');
       }
     });
   };

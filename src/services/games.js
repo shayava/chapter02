@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 const games = [];
 let nextId = 1;
 class Game {
