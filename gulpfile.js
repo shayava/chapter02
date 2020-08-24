@@ -14,7 +14,10 @@ gulp.task("lint-server", function () {
       eslint({
         envs: ["es6", "node"],
         rules: {
-          "no-unused-vars": [2, { argsIgnorePattern: "next" }],
+            "no-unused-vars": [2, {
+                a
+            rgsIgnorePattern: "next"
+            }],
         },
       })
     )
