@@ -3,4 +3,4 @@ before_script:
 - npm install -g gulp
 script: gulp default integration-test
 node_js:
--12
+-10
