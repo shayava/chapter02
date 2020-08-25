@@ -1,14 +1,14 @@
 {
   "extends": "eslint:recommended",
   "rules": {
-    "no-unused-vars": [
-      2,
-      {
-        "args": "after-used"
-      }
-    ],
-    "quotes": [2, "single"],
-    "semi": [2, "always"],
-    "strict": [2, "safe"]
+    // "no-unused-vars": [
+    //   2,
+    //   {
+    //     "args": "after-used"
+    //   }
+    // ],
+    //"quotes": [2, "single"],
+    "semi": [2, "always"]
+    //"strict": [2, "safe"]
   }
 }
