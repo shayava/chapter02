@@ -1,12 +1,12 @@
 "use strict";
-const gulp = require("gulp");
-const mocha = require("gulp-mocha");
-const env = require("gulp-env");
+var gulp = require("gulp");
+var mocha = require("gulp-mocha");
+var env = require("gulp-env");
 
-const eslint = require("gulp-eslint");
-const istanbul = require("gulp-istanbul");
+var eslint = require("gulp-eslint");
+var istanbul = require("gulp-istanbul");
 
-const shell = require("gulp-shell");
+var shell = require("gulp-shell");
 gulp.task("lint-server", function () {
   return gulp
     .src(["src/**/*.js", "!src/public/**/*.js"])
@@ -14,10 +14,12 @@ gulp.task("lint-server", function () {
       eslint({
         envs: ["es6", "node"],
         rules: {
-            "no-unused-vars": [2, {
-                a
-            rgsIgnorePattern: "next"
-            }],
+          "no-unused-vars": [
+            2,
+            {
+              rgsIgnorePattern: "next",
+            },
+          ],
         },
       })
     )
@@ -79,8 +81,10 @@ gulp.task("test", ["lint-test", "instrument"], function () {
     );
 });
 
-gulp.task("integration-test", ["lint-integration-test", "test"], (done) => {
-  const TEST_PORT = 5000;
+gulp.task("integration-test", ["lint-integration-test", "test"], function (
+  done
+) {
+  var TEST_PORT = 5000;
   let server = require("http")
     .createServer(require("./src/app.js"))
     .listen(TEST_PORT, function () {
