@@ -1,6 +1,7 @@
 language: node_js
 before_script:
+- nvm install -10
 - npm install -g gulp
 script: gulp default integration-test
 node_js:
--8
+-10
